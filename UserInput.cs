@@ -35,12 +35,12 @@ namespace GameOfLife
         public static int UserInputWidth()
         {
             int y;
-            Console.WriteLine("Enter the height of the board.");
+            Console.WriteLine("Enter the width of the board.");
             var temp = Console.ReadLine();
 
             while (!Int32.TryParse(temp, out y))
             {
-                Console.WriteLine("Wrong input, enter integer value of heigth.");
+                Console.WriteLine("Wrong input, enter integer value of width.");
                 temp = Console.ReadLine();
             }
 
