@@ -2,47 +2,27 @@
 
 namespace GameOfLife
 {
-
-    public class Program
+    public class Program : UserInput
     {
-
         public static void Main(string[] args)
         {
-            int x, y;
-
-            Console.WriteLine("Enter the height of the board. Value should be over 40"); // will implement x<40 check later
-            var temp = Console.ReadLine();
-            while (!Int32.TryParse(temp, out x))
-            {
-                Console.WriteLine("Wrong input, enter integer value of heigth.");
-                temp = Console.ReadLine();
-            }
-
-            Console.WriteLine("Enter the width of the game board.Value should be over 90");
-
-            while (!Int32.TryParse(Console.ReadLine(), out y))
-            {
-                Console.WriteLine("Wrong input, enter integer value of width.");
-                temp = Console.ReadLine();
-            }
-
+            int x = UserInputHeight();
+            int y = UserInputHeight();
 
             Console.Clear();
 
-            Game gameOfLife = new Game(x, y);
+            Game game = new Game(x, y);
 
-
-            Game_Graphic gameView = new Game_Graphic(gameOfLife);
+            GameGraphic gameGraphic = new GameGraphic(game);
 
             while (true)
             {
-                gameView.DrawBoard();
-                gameOfLife.GenerateNextGen();
+                gameGraphic.DrawBoard();
+                game.GenerateNextGeneration();
 
-                Thread.Sleep(1000); // updates every second
+                // Updates every second.
+                Thread.Sleep(1000);
             }
-
         }
-
     }
 }

@@ -1,36 +1,53 @@
 ﻿using System;
 
-
 namespace GameOfLife
 {
     public class Game
     {
+        /// <summary>
+        /// Properties.
+        /// </summary>
+        public int Height { get; } 
+        public int Width { get; } 
+        public int[,] currentGeneration { get; private set; }
 
-        public int Height { get; set; } // x
-        public int Width { get; set; } //y
+        private int[,] nextGeneration;
 
-        public int[,] currentGen { get; set; }
-        public int[,] nextGen { get; set; }
-
-
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Game(int x, int y)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        /// <summary>
+        /// Constructor without parameters.
+        /// </summary>
+        public Game()
         {
-            this.Height = x;
-            this.Width = y;
+            Height = 16;
+            Width = 16;
+
+            currentGeneration = new int[Height, Width];
+            nextGeneration = new int[Height, Width];
 
             InitializeBoard();
         }
 
+        /// <summary>
+        /// Constructor with parameters from user.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public Game(int x, int y)
+        {
+            this.Height = x;
+            this.Width = y;
+
+            currentGeneration = new int[Height, Width];
+            nextGeneration = new int[Height, Width];
+
+            InitializeBoard();
+        }
+        /// <summary>
+        /// Initiate current and next generation boards.
+        /// </summary>
         private void InitializeBoard()
         {
-            // initiate current and next gen boards
-
-            currentGen = new int[Height, Width];
-            nextGen = new int[Height, Width];
-
-            // loop over cells using range to set live/dead cells
+            // Loop over cells using range to set live/dead cells.
 
             var range = new Random();
 
@@ -38,54 +55,68 @@ namespace GameOfLife
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    // random board
+                    // Create a random board.
 
                     if (range.Next(1, 101) < 50)
-                        currentGen[i, j] = 0;
+                        currentGeneration[i, j] = 0;
 
                     else
-                        currentGen[i, j] = 1;
+                        currentGeneration[i, j] = 1;
                 }
             }
         }
 
-        // transfer next gen to current gen
-
-        private void TransferNextGen()
+        /// <summary>
+        /// Transfer next generation to current generation.
+        /// </summary>
+        private void TransferNextGeneration()
         {
             for (int i = 0; i < Height; i++)
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    currentGen[i, j] = nextGen[i, j];
+                    currentGeneration[i, j] = nextGeneration[i, j];
                 }
             }
+
         }
 
-
-        // calculate live neighbours
-
+        /// <summary>
+        /// Calculate live neighbours.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         private int CalcLiveNeighbours(int x, int y)
         {
             int liveNeighbours = 0;
+
             for (int i = -1; i <= 1; i++)
             {
                 for (int j = -1; j <= 1; j++)
                 {
-                    if (x + i < 0 || x + i >= x) // check if out of bonds
+                    // Checks if out of bonds.
+
+                    if (x + i < 0 || x + i >= Height)
                         continue;
-                    if (y + j < 0 || y + j >= y) // check if out of bonds
-                        continue;
-                    if (x + i == x && y + -j == y) // same cell
+                    if (y + j < 0 || y + j >= Width)
                         continue;
 
-                    liveNeighbours += currentGen[x + i, y + j];
+                    //Check if the same cell.
+
+                    if (x + i == x && y + j == y)
+                        continue;
+
+                    liveNeighbours += currentGeneration[x + i, y + j];
                 }
             }
             return liveNeighbours;
         }
 
-        public void GenerateNextGen()
+        /// <summary>
+        /// Create the next generation.
+        /// </summary>
+        public void GenerateNextGeneration()
         {
             for (int x = 0; x < this.Height; x++)
             {
@@ -93,23 +124,22 @@ namespace GameOfLife
                 {
                     int liveNeighbours = CalcLiveNeighbours(x, y);
 
-                    if (currentGen[x, y] == 1 && liveNeighbours > 2)
-                        nextGen[x, y] = 0;
-
-                    else if (currentGen[x, y] == 1 && liveNeighbours > 3)
-                        nextGen[x, y] = 0;
-
-                    else if (currentGen[x, y] == 0 && liveNeighbours == 3)
-                        nextGen[x, y] = 1;
-
-                    else nextGen[x, y] = currentGen[x, y];
-
-
+                    switch (liveNeighbours)
+                    {
+                        case 3:
+                            nextGeneration[x, y] = 1;
+                            break;
+                        case 2:
+                            nextGeneration[x, y] = currentGeneration[x, y];
+                            break;
+                        default:
+                            nextGeneration[x, y] = 0;
+                            break;
+                    }
                 }
             }
 
-            TransferNextGen();
+            TransferNextGeneration();
         }
-
     }
 }
