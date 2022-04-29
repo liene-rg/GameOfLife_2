@@ -11,7 +11,6 @@ namespace GameOfLife
         public int Width { get; set; }
         public int[,] currentGeneration { get; private set; }
         public int[,] nextGeneration { get; private set; }
-
         /// <summary>
         /// Constructor without parameters.
         /// </summary>
@@ -75,7 +74,6 @@ namespace GameOfLife
         public int CalcLiveNeighbours(int x, int y)
         {
             int liveNeighbours = 0;
-
             for (int i = -1; i <= 1; i++)
             {
                 for (int j = -1; j <= 1; j++)
@@ -86,7 +84,6 @@ namespace GameOfLife
                     {
                         continue;
                     }
-
                     if (y + j < 0 || y + j >= Width)
                     {
                         continue;
@@ -98,7 +95,6 @@ namespace GameOfLife
                     {
                         continue;
                     }
-
                     liveNeighbours += currentGeneration[x + i, y + j];
                 }
             }

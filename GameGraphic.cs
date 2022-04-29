@@ -45,7 +45,6 @@ namespace GameOfLife
         public void CalculateLiveCellsCurrentGeneration()
         {
             int liveCells = 0;
-
             for (int i = 0; i < gameOfLife.Height; i++)
             {
                 for (int j = 0; j < gameOfLife.Width; j++)
