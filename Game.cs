@@ -7,11 +7,10 @@ namespace GameOfLife
         /// <summary>
         /// Properties.
         /// </summary>
-        public int Height { get; } 
-        public int Width { get; } 
+        public int Height { get; set; }
+        public int Width { get; set; }
         public int[,] currentGeneration { get; private set; }
-
-        private int[,] nextGeneration;
+        public int[,] nextGeneration { get; private set; }
 
         /// <summary>
         /// Constructor without parameters.
@@ -20,7 +19,6 @@ namespace GameOfLife
         {
             Height = 16;
             Width = 16;
-
             currentGeneration = new int[Height, Width];
             nextGeneration = new int[Height, Width];
 
@@ -30,13 +28,12 @@ namespace GameOfLife
         /// <summary>
         /// Constructor with parameters from user.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x"></param> Number of rows.
+        /// <param name="y"></param> Number of columns.
         public Game(int x, int y)
         {
             this.Height = x;
             this.Width = y;
-
             currentGeneration = new int[Height, Width];
             nextGeneration = new int[Height, Width];
 
@@ -57,37 +54,25 @@ namespace GameOfLife
                 {
                     // Create a random board.
 
-                    if (range.Next(1, 101) < 50)
+                    if (range.Next(1, 101) < 70)
+                    {
                         currentGeneration[i, j] = 0;
-
+                    }
                     else
+                    {
                         currentGeneration[i, j] = 1;
+                    }
                 }
             }
-        }
-
-        /// <summary>
-        /// Transfer next generation to current generation.
-        /// </summary>
-        private void TransferNextGeneration()
-        {
-            for (int i = 0; i < Height; i++)
-            {
-                for (int j = 0; j < Width; j++)
-                {
-                    currentGeneration[i, j] = nextGeneration[i, j];
-                }
-            }
-
         }
 
         /// <summary>
         /// Calculate live neighbours.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x"></param> Height.
+        /// <param name="y"></param> Width.
         /// <returns></returns>
-        private int CalcLiveNeighbours(int x, int y)
+        public int CalcLiveNeighbours(int x, int y)
         {
             int liveNeighbours = 0;
 
@@ -98,14 +83,21 @@ namespace GameOfLife
                     // Checks if out of bonds.
 
                     if (x + i < 0 || x + i >= Height)
+                    {
                         continue;
+                    }
+
                     if (y + j < 0 || y + j >= Width)
+                    {
                         continue;
+                    }
 
                     //Check if the same cell.
 
                     if (x + i == x && y + j == y)
+                    {
                         continue;
+                    }
 
                     liveNeighbours += currentGeneration[x + i, y + j];
                 }
@@ -138,8 +130,7 @@ namespace GameOfLife
                     }
                 }
             }
-
-            TransferNextGeneration();
+            currentGeneration = nextGeneration;
         }
     }
 }

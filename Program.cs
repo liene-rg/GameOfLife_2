@@ -2,27 +2,20 @@
 
 namespace GameOfLife
 {
-    public class Program : UserInput
+    public class Program
     {
         public static void Main(string[] args)
-        {
-            int x = UserInputHeight();
-            int y = UserInputHeight();
+        { 
+            int x = UserInput.GetUserInput("Enter the Heigth");
+            var y = UserInput.GetUserInput("Enter the Width");
 
             Console.Clear();
 
-            Game game = new Game(x, y);
+            Game game = new Game(x,y);
 
             GameGraphic gameGraphic = new GameGraphic(game);
 
-            while (true)
-            {
-                gameGraphic.DrawBoard();
-                game.GenerateNextGeneration();
-
-                // Updates every second.
-                Thread.Sleep(1000);
-            }
+            GameHandling.RunGame(game, gameGraphic);
         }
     }
 }

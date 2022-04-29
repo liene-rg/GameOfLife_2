@@ -7,44 +7,31 @@ using GameOfLife;
 
 namespace GameOfLife
 {
-    public class UserInput
+    public static class UserInput
     {
         /// <summary>
         /// Returns an int of Height from user input.
         /// </summary>
         /// <returns></returns>
-        public static int UserInputHeight()
-        {
-            int x;
-            Console.WriteLine("Enter the height of the board.");
-            var temp = Console.ReadLine();
-
-            while (!Int32.TryParse(temp, out x))
-            {
-                Console.WriteLine("Wrong input, enter integer value of heigth.");
-                temp = Console.ReadLine();
-            }
-
-            return x;
-        }
+        /// 
+        public static int validUserInput;
+        public static string wrongUserInput = "Wrong input, enter integer value.";
 
         /// <summary>
-        /// Returns an int of Width from user input.
+        /// Gets the value of either Height or Width from the user.
         /// </summary>
-        /// <returns></returns>
-        public static int UserInputWidth()
+        /// <param name="promptMessage"></param> Message that will be displayed to user.
+        /// <returns></returns> Returns an integer value from user input.
+        public static int GetUserInput(string promptMessage)
         {
-            int y;
-            Console.WriteLine("Enter the width of the board.");
-            var temp = Console.ReadLine();
+            Console.WriteLine(promptMessage);
 
-            while (!Int32.TryParse(temp, out y))
+            while (!Int32.TryParse(Console.ReadLine(), out validUserInput))
             {
-                Console.WriteLine("Wrong input, enter integer value of width.");
-                temp = Console.ReadLine();
+                Console.WriteLine(wrongUserInput);
+                Console.ReadLine();
             }
-
-            return y;
+            return validUserInput;
         }
     }
 }
