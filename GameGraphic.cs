@@ -9,7 +9,7 @@ namespace GameOfLife
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="gameObject"></param> Game object that will be made.
+        /// <param name="gameObject  Game object that will be made."></param> 
         public GameGraphic(Game gameObject)
         {
             gameOfLife = gameObject;

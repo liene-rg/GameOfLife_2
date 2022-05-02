@@ -27,8 +27,8 @@ namespace GameOfLife
         /// <summary>
         /// Constructor with parameters from user.
         /// </summary>
-        /// <param name="x"></param> Number of rows.
-        /// <param name="y"></param> Number of columns.
+        /// <param name="x Number of rows (height)."></param> 
+        /// <param name="y  Number of columns (width)."></param>
         public Game(int x, int y)
         {
             this.Height = x;
@@ -68,8 +68,8 @@ namespace GameOfLife
         /// <summary>
         /// Calculate live neighbours.
         /// </summary>
-        /// <param name="x"></param> Height.
-        /// <param name="y"></param> Width.
+        /// <param name="x Height"></param>
+        /// <param name="y Width."></param>
         /// <returns></returns>
         public int CalcLiveNeighbours(int x, int y)
         {

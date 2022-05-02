@@ -10,8 +10,8 @@ namespace GameOfLife
         /// <summary>
         /// Gets the value of either Height or Width from the user.
         /// </summary>
-        /// <param name="promptMessage"></param> Message that will be displayed to user.
-        /// <returns></returns> Returns an integer value from user input.
+        /// <param name="promptMessage Message that will be displayed to user."></param> 
+        /// <returns>Returns an integer value from user input.</returns> 
         public static int GetUserInput(string promptMessage)
         {
             Console.WriteLine(promptMessage);
