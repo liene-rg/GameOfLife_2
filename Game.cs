@@ -2,6 +2,7 @@
 
 namespace GameOfLife
 {
+    [Serializable]
     public class Game
     {
         /// <summary>
@@ -10,7 +11,7 @@ namespace GameOfLife
         public int Height { get; set; }
         public int Width { get; set; }
         public int[,] currentGeneration { get; private set; }
-        public int[,] nextGeneration { get; private set; }
+
         /// <summary>
         /// Constructor without parameters.
         /// </summary>
@@ -19,7 +20,6 @@ namespace GameOfLife
             Height = 16;
             Width = 16;
             currentGeneration = new int[Height, Width];
-            nextGeneration = new int[Height, Width];
 
             InitializeBoard();
         }
@@ -34,8 +34,7 @@ namespace GameOfLife
             this.Height = x;
             this.Width = y;
             currentGeneration = new int[Height, Width];
-            nextGeneration = new int[Height, Width];
-
+     
             InitializeBoard();
         }
         /// <summary>
@@ -43,7 +42,7 @@ namespace GameOfLife
         /// </summary>
         private void InitializeBoard()
         {
-            // Loop over cells using range to set live/dead cells.
+            //Loop over cells using range to set live/ dead cells.
 
             var range = new Random();
 
@@ -68,37 +67,23 @@ namespace GameOfLife
         /// <summary>
         /// Calculate live neighbours.
         /// </summary>
-        /// <param name="x Height"></param>
-        /// <param name="y Width."></param>
-        /// <returns></returns>
-        public int CalcLiveNeighbours(int x, int y)
+        /// <param name="currentRow Height"></param>
+        /// <param name="currentColumn Width."></param>
+        /// <returns>Returns number of neighbours.</returns>
+        public int CalcLiveNeighbours(int currentRow, int currentColumn)
         {
             int liveNeighbours = 0;
-            for (int i = -1; i <= 1; i++)
+            for (int rowOffSet = -1; rowOffSet <= 1; rowOffSet++)
             {
-                for (int j = -1; j <= 1; j++)
+                for (int columnOffSet = -1; columnOffSet <= 1; columnOffSet++)
                 {
-                    // Checks if out of bonds.
-
-                    if (x + i < 0 || x + i >= Height)
-                    {
-                        continue;
-                    }
-                    if (y + j < 0 || y + j >= Width)
-                    {
-                        continue;
-                    }
-
-                    //Check if the same cell.
-
-                    if (x + i == x && y + j == y)
-                    {
-                        continue;
-                    }
-                    liveNeighbours += currentGeneration[x + i, y + j];
+                    int actualRow = (currentRow + rowOffSet + Height) % Height;
+                    int actualColumn = (currentColumn + columnOffSet + Width) % Width;
+                    liveNeighbours += currentGeneration[actualRow, actualColumn];
                 }
             }
-            return liveNeighbours;
+
+            return liveNeighbours - currentGeneration[currentRow, currentColumn];
         }
 
         /// <summary>
@@ -106,6 +91,7 @@ namespace GameOfLife
         /// </summary>
         public void GenerateNextGeneration()
         {
+            int[,] nextGeneration = new int[Height, Width];
             for (int x = 0; x < this.Height; x++)
             {
                 for (int y = 0; y < this.Width; y++)
@@ -126,6 +112,7 @@ namespace GameOfLife
                     }
                 }
             }
+
             currentGeneration = nextGeneration;
         }
     }
