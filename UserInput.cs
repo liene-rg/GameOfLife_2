@@ -7,6 +7,7 @@ namespace GameOfLife
     {
         public static int validUserInput;
         public static string wrongUserInput = "Wrong input, enter integer value.";
+   
         /// <summary>
         /// Gets the value of either Height or Width from the user.
         /// </summary>

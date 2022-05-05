@@ -31,7 +31,7 @@ namespace GameOfLife
         /// </summary>
         /// <param name="filePath File path."></param>
         /// <returns></returns>
-        public static object LoadGame(string filePath) // BinaryDeserialize
+        public object LoadGame(string filePath) // BinaryDeserialize
         {
             object? gameObj = null;
             FileStream fileStream;

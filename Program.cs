@@ -10,36 +10,39 @@ namespace GameOfLife
     {
         public static void Main(string[] args)
         {
+            //GameMenu.PrintMenu();
+            GameHandling.StartApplication();
 
-            int x = UserInput.GetUserInput("Enter the Heigth");
-            var y = UserInput.GetUserInput("Enter the Width");
-            Game game = new Game(x, y);
-            GameGraphic gameGraphic = new GameGraphic(game);
 
-            string filePath = "gameOutput.txt";
-            DataManagement dataManagement = new DataManagement();
-            GameGraphic? gameGraphic1 = null;
-            DataManagement.SaveGame(gameGraphic, filePath);
-            gameGraphic1 = DataManagement.LoadGame(filePath) as GameGraphic;
-
-         
-            //while (isGameOngoing)
+            //string filePath = "gameOutput.txt";
+            //DataManagement dataManagement = new DataManagement();
+            //GameGraphic? gameGraphic1 = null;
+            //bool showMenu = true;
+            //while (showMenu)
             //{
-            //    int response = GetMenuResponse();
+            //    GameMenu menu = new GameMenu();
+            //    string response = menu.GetMenuResponse();
             //    switch (response)
             //    {
-            //        case 0:
-            //            RunGame();
+            //        case "N":
+            //            int x = UserInput.GetUserInput("Enter the Heigth");
+            //            var y = UserInput.GetUserInput("Enter the Width");
+            //            Game game = new Game(x, y);
+            //            GameGraphic gameGraphic = new GameGraphic(game);
+            //            GameHandling.RunGame(game, gameGraphic);
             //            break;
-            //        case 1:
-            //            LoadSavedGame();
+            //        case "S":
+            //            dataManagement.SaveGame(gameGraphic, filePath);
             //            break;
-            //        case 2:
-            //            isGameOnGoing = false;
+            //        case "L":
+            //            dataManagement.LoadGame(filePath);
+            //            break;
+            //        case "Q":
+            //            showMenu = false;
             //            break;
             //    }
             //}
-            GameHandling.RunGame(game, gameGraphic);
+
         }
     }
 }
