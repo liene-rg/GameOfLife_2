@@ -55,13 +55,12 @@ namespace GameOfLife
                 Console.WriteLine("Game ended");
             }
         }
-
         /// <summary>
-        /// Calculates and returns the number of currently live cells.
+        /// Calculates number of live cells in current generation.
         /// </summary>
+        /// <returns>Returns the number of currently alive cells.</returns>
         public int CalculateLiveCellsCurrentGeneration()
         {
-            //Console.Clear();
             int liveCells = 0;
             for (int i = 0; i < gameOfLife.Height; i++)
             {

@@ -6,9 +6,9 @@ namespace GameOfLife
 {
     public class GameHandling
     {
-        public bool gameIsRunning = true;
-        public string filePath = "gameOutput.txt";
+        private bool gameIsRunning = true;
         Game? game;
+        GameGraphic? gameGraphic;
 
         /// <summary>
         /// Starts and runs custom game.
@@ -25,11 +25,11 @@ namespace GameOfLife
             else
             {
                 game = new Game(x, y);
-                GameGraphic gameGraphic = new GameGraphic(game);
+                gameGraphic = new GameGraphic(game);
 
                 while (Console.KeyAvailable == false)
                 {
-                    Console.WriteLine("Live cells " + gameGraphic.CalculateLiveCellsCurrentGeneration() + "Iteration: " + game.iterationCount.ToString());
+                    Console.WriteLine("Live cells: " + gameGraphic.CalculateLiveCellsCurrentGeneration() + "Iteration: " + game.iterationCount);
                     gameGraphic.DrawGameWindow();
                     game.GenerateNextGeneration();
                     Thread.Sleep(1000);
@@ -44,10 +44,10 @@ namespace GameOfLife
         public void RunRandomGame()
         {
             game = new Game();
-            GameGraphic gameGraphic = new GameGraphic(game);
+            gameGraphic = new GameGraphic(game);
             while (Console.KeyAvailable == false)
             {
-                Console.WriteLine("Live cells " + gameGraphic.CalculateLiveCellsCurrentGeneration() + "Iteration: " + game.iterationCount.ToString());
+                Console.WriteLine("Live cells " + gameGraphic.CalculateLiveCellsCurrentGeneration() + "Iteration: " + game.iterationCount);
                 gameGraphic.DrawGameWindow();
                 game.GenerateNextGeneration();
                 Thread.Sleep(1000);
@@ -72,9 +72,7 @@ namespace GameOfLife
                         RunRandomGame();
                         break;
                     case ConsoleKey.S:
-#pragma warning disable CS8604 // Possible null reference argument.
                         dataManagement.SaveGame(game);
-#pragma warning restore CS8604 // Possible null reference argument.
                         break;
                     case ConsoleKey.L:
                         dataManagement.LoadGame();

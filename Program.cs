@@ -8,7 +8,7 @@ namespace GameOfLife
         {
             GameHandling gameHandling = new GameHandling();
             gameHandling.RunApplication();
-            
+
         }
     }
 }

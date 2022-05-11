@@ -8,13 +8,15 @@ namespace GameOfLife
 {
     public class GameMenu
     {
-        public static string newCustomGameOption = "Press 'P' to Play game";
-        public static string newRandomGameOptions = "Press 'R' to Play Random game";
-        public static string saveGameOption = "Press 'S' to Save game";
-        public static string loadGameOption = "Press 'L' to Load game";
-        public static string quitGameOption = "Press 'Q' to Quit game";
+        public static string newCustomGameOption = "Press 'P' to Play game.";
+        public static string newRandomGameOptions = "Press 'R' to Play Random game.";
+        public static string saveGameOption = "Press 'S' to Save game.";
+        public static string loadGameOption = "Press 'L' to Load game.";
+        public static string quitGameOption = "Press 'Q' to Quit game.";
         public static string gameFinished = "Game finished.";
         public static string gameTitle = "Game Of Life";
+        public static string failedToSaveMsg = "Failed to Save game.";
+        public static string failedToLoadMsg = "Failed to Load game.";
         /// <summary>
         /// Get response from user.
         /// </summary>

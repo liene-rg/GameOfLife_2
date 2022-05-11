@@ -71,7 +71,7 @@ namespace GameOfLife
         /// </summary>
         /// <param name="currentRow Height"></param>
         /// <param name="currentColumn Width."></param>
-        /// <returns>Returns number of neighbours.</returns>
+        /// <returns>Returns number of live neighbours.</returns>
         public int CalcLiveNeighbours(int currentRow, int currentColumn)
         {
             int liveNeighbours = 0;
