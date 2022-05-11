@@ -1,6 +1,4 @@
-﻿using GameOfLife;
-
-namespace GameOfLife
+﻿namespace GameOfLife
 {
     public class Program
     {

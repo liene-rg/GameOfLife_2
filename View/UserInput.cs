@@ -1,7 +1,4 @@
-﻿using System;
-using GameOfLife;
-
-namespace GameOfLife
+﻿namespace GameOfLife
 {
     public static class UserInput
     {

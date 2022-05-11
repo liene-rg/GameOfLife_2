@@ -1,7 +1,4 @@
-﻿using GameOfLife;
-using System;
-
-namespace GameOfLife
+﻿namespace GameOfLife
 {
     public class GameGraphic : Game
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using GameOfLife;
-using System.Diagnostics;
-
-namespace GameOfLife
+﻿namespace GameOfLife
 {
     public class GameHandling
     {
