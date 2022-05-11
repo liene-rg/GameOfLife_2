@@ -6,75 +6,85 @@ namespace GameOfLife
 {
     public class GameHandling
     {
-        public static string filePath = "gameOutput.txt";
+        public bool gameIsRunning = true;
+        public string filePath = "gameOutput.txt";
+        Game? game;
 
         /// <summary>
-        /// Runs the game without user input.
+        /// Starts and runs custom game.
         /// </summary>
-        public static void RunDefaultGame()
-        {
-            Game game = new Game();
-            GameGraphic gameGraphicsManager = new GameGraphic(game);
-            while (true)
-            {
-                gameGraphicsManager.CalculateLiveCellsCurrentGeneration();
-                gameGraphicsManager.DrawBoard();
-                game.GenerateNextGeneration();
-                Thread.Sleep(1000);
-            }
-        }
-        /// <summary>
-        /// Runs the game with user input.
-        /// </summary>
-        public static void RunCustomGame()
+        public void RunCustomGame()
         {
             int x = UserInput.GetUserInput("Enter the Heigth");
-            var y = UserInput.GetUserInput("Enter the Width");
+            int y = UserInput.GetUserInput("Enter the Width");
 
-            Game game = new Game(x, y);
-            GameGraphic gameGraphicsManager = new GameGraphic(game);
-            while (true)
+            if ((x > UserInput.maxInputValue || x < UserInput.minInputValue) || (y > UserInput.maxInputValue || y < UserInput.minInputValue))
             {
-                gameGraphicsManager.CalculateLiveCellsCurrentGeneration();
-                gameGraphicsManager.DrawBoard();
-                game.GenerateNextGeneration();
-                Thread.Sleep(1000);
+                Console.WriteLine(UserInput.wrongUserInput);
+            }
+            else
+            {
+                game = new Game(x, y);
+                GameGraphic gameGraphic = new GameGraphic(game);
+
+                while (Console.KeyAvailable == false)
+                {
+                    Console.WriteLine("Live cells " + gameGraphic.CalculateLiveCellsCurrentGeneration() + "Iteration: " + game.iterationCount.ToString());
+                    gameGraphic.DrawGameWindow();
+                    game.GenerateNextGeneration();
+                    Thread.Sleep(1000);
+                    Console.WriteLine();
+                }
             }
         }
-        public static void StartApplication()
+        /// <summary>
+        /// Creates and displays game with default Height and Width values.
+        /// </summary>
+        /// <returns></returns>
+        public void RunRandomGame()
         {
-            while (true)
+            game = new Game();
+            GameGraphic gameGraphic = new GameGraphic(game);
+            while (Console.KeyAvailable == false)
             {
-                //Console.Clear();
-                GameMenu.PrintMenu();
+                Console.WriteLine("Live cells " + gameGraphic.CalculateLiveCellsCurrentGeneration() + "Iteration: " + game.iterationCount.ToString());
+                gameGraphic.DrawGameWindow();
+                game.GenerateNextGeneration();
+                Thread.Sleep(1000);
+                Console.WriteLine();
+            }
+        }
+        /// <summary>
+        /// Displays the menu and runs the application.
+        /// </summary>
+        public void RunApplication()
+        {
+            DataManagement dataManagement = new DataManagement();
 
+            while (gameIsRunning || Console.KeyAvailable == false)
+            {
                 switch (GameMenu.GetMenuResponse())
                 {
-                    case "N":
-                        {
-                            GameHandling.RunCustomGame();
-                        }
+                    case ConsoleKey.P:
+                        RunCustomGame();
                         break;
-                    case "R":
-                        {
-                            GameHandling.RunDefaultGame();
-                        }
+                    case ConsoleKey.R:
+                        RunRandomGame();
                         break;
-                    case "L":
-                        {
-                            DataManagement dataManagement = new DataManagement();
-                            dataManagement.LoadGame(filePath);
-                        }
+                    case ConsoleKey.S:
+#pragma warning disable CS8604 // Possible null reference argument.
+                        dataManagement.SaveGame(game);
+#pragma warning restore CS8604 // Possible null reference argument.
                         break;
-                    case "S":
-                        {
-                            //DataManagement.SaveGame();
-                        }
+                    case ConsoleKey.L:
+                        dataManagement.LoadGame();
                         break;
-                    case "Q":
-                        {
-
-                        }
+                    case ConsoleKey.Q:
+                        gameIsRunning = false;
+                        GameMenu.DisplayExitMessage();
+                        break;
+                    default:
+                        GameMenu.DisplayExitMessage();
                         break;
                 }
             }

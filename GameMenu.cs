@@ -8,32 +8,41 @@ namespace GameOfLife
 {
     public class GameMenu
     {
-        public static string saveGameOption = "Enter 'S' to save the game";
-        public static string loadGameOption = "Enter 'L' to load the game";
-        public static  string quitGameOption = "Enter 'Q' to quit the game";
-        public static string customGameOption = "Enter 'N' to play new custom size game";
-        public static string randomGameOption = "Enter 'R' to play new random game";
-
-        /// <summary>
-        /// Prints the menu on the screen.
-        /// </summary>
-        public static void PrintMenu()
-        {
-            Console.WriteLine(customGameOption);
-            Console.WriteLine(randomGameOption);
-            Console.WriteLine(saveGameOption);
-            Console.WriteLine(loadGameOption);
-            Console.WriteLine(quitGameOption);
-        }
-
+        public static string newCustomGameOption = "Press 'P' to Play game";
+        public static string newRandomGameOptions = "Press 'R' to Play Random game";
+        public static string saveGameOption = "Press 'S' to Save game";
+        public static string loadGameOption = "Press 'L' to Load game";
+        public static string quitGameOption = "Press 'Q' to Quit game";
+        public static string gameFinished = "Game finished.";
+        public static string gameTitle = "Game Of Life";
         /// <summary>
         /// Get response from user.
         /// </summary>
         /// <returns>Returns menu input from user.</returns>
-        public static string GetMenuResponse()
+        public static ConsoleKey GetMenuResponse()
         {
-            string userInputFromMenuOptions = Console.ReadLine();
-            return userInputFromMenuOptions.ToUpper();
+            DisplayApplicationMenu();
+            return Console.ReadKey(true).Key;    
+        }
+        /// <summary>
+        /// Displays the menu on console.
+        /// </summary>
+        public static void DisplayApplicationMenu()
+        {
+            Console.Title = gameTitle;
+            Console.WriteLine(newCustomGameOption);
+            Console.WriteLine(newRandomGameOptions);
+            Console.WriteLine(saveGameOption);
+            Console.WriteLine(loadGameOption);
+            Console.WriteLine(quitGameOption);
+        }
+        /// <summary>
+        /// Displays the exit message after user has exited the game.
+        /// </summary>
+        public static void DisplayExitMessage()
+        {
+            Console.Clear();
+            Console.WriteLine(gameFinished);
         }
     }
 }

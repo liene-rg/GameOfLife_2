@@ -3,14 +3,13 @@ using System;
 
 namespace GameOfLife
 {
-    [Serializable]
     public class GameGraphic : Game
     {
-        private Game gameOfLife;
+        public Game gameOfLife;
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="gameObject "></param> Game object that will be made.
+        /// <param name="gameObject Game object that will be made."></param> 
         public GameGraphic(Game gameObject)
         {
             gameOfLife = gameObject;
@@ -37,15 +36,32 @@ namespace GameOfLife
                 }
                 Console.WriteLine();
             }
-            Console.SetCursorPosition(0, 0);
+        }
+        /// <summary>
+        /// Displays the game and game information.
+        /// </summary>
+        public void DrawGameWindow()
+        {
+            Console.Clear();
+            GameMenu.DisplayApplicationMenu();
+            Console.WriteLine();
+            Console.WriteLine("Live cells: " + CalculateLiveCellsCurrentGeneration() + " Iteration: " + gameOfLife.iterationCount);
+            
+            DrawBoard();
+
+            if(CalculateLiveCellsCurrentGeneration() == 0)
+            {
+                Console.Clear();
+                Console.WriteLine("Game ended");
+            }
         }
 
         /// <summary>
-        /// Calculates and displays the number of currently live cells.
+        /// Calculates and returns the number of currently live cells.
         /// </summary>
-        public void CalculateLiveCellsCurrentGeneration()
+        public int CalculateLiveCellsCurrentGeneration()
         {
-            Console.Clear();
+            //Console.Clear();
             int liveCells = 0;
             for (int i = 0; i < gameOfLife.Height; i++)
             {
@@ -55,24 +71,7 @@ namespace GameOfLife
                 }
             }
 
-            Console.WriteLine("Live cell count " + liveCells);
-        }
-
-        //public void DisplayIterationCount()
-        //{
-        //    int iteration = 1;
-
-        //    for (int i = 0; i < gameOfLife.Height; i++)
-        //    {
-        //        for (int j = 0; j < gameOfLife.Width; j++)
-        //        {
-                    
-        //        }
-
-
-        //    }
-
-        //    Console.WriteLine("Iteration: " + iteration);
-        //}
+            return liveCells;
+        }      
     }
 }

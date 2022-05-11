@@ -11,6 +11,7 @@ namespace GameOfLife
         public int Height { get; set; }
         public int Width { get; set; }
         public int[,] currentGeneration { get; private set; }
+        public int iterationCount = 1;
 
         /// <summary>
         /// Constructor without parameters.
@@ -33,8 +34,9 @@ namespace GameOfLife
         {
             this.Height = x;
             this.Width = y;
+
             currentGeneration = new int[Height, Width];
-     
+
             InitializeBoard();
         }
         /// <summary>
@@ -114,6 +116,7 @@ namespace GameOfLife
             }
 
             currentGeneration = nextGeneration;
+            iterationCount++;
         }
     }
 }
