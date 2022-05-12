@@ -9,7 +9,7 @@
         /// <summary>
         /// Gets the value of either Height or Width from the user.
         /// </summary>
-        /// <param name="promptMessage Message that will be displayed to user."></param> 
+        /// <param name="promptMessage">Message that will be displayed to user.</param> 
         /// <returns>Returns an integer value from user input.</returns> 
         public static int GetUserInput(string promptMessage)
         {
@@ -20,8 +20,13 @@
                 Console.ReadLine();
             }    
             return _validUserInput;
-        }      
-
+        }
+        /// <summary>
+        /// Validates if user has entered the values within the required range.
+        /// </summary>
+        /// <param name="x ">Integer value of user input.</param>
+        /// <param name="y">Integer value of user input.</param>
+        /// <returns>Returns true if values are within range, false otherwise.</returns>
         public static bool ValidateUserInputValue(int x, int y )
         {
             if ((x > _maxInputValue || x < _minInputValue) || (y > _maxInputValue || y < _minInputValue))
