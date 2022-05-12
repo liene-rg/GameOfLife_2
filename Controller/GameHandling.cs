@@ -2,52 +2,40 @@
 {
     public class GameHandling
     {
-        private bool gameIsRunning = true;
-        Game? game;
-        GameGraphic? gameGraphic;
+        private bool _gameIsRunning = true;
+        private Game? _game;
+        private GameGraphic? _gameGraphic;
 
         /// <summary>
         /// Starts and runs custom game.
         /// </summary>
-        public void RunCustomGame()
+        private void RunCustomGame()
         {
             int x = UserInput.GetUserInput("Enter the Heigth");
             int y = UserInput.GetUserInput("Enter the Width");
 
-            if ((x > UserInput.maxInputValue || x < UserInput.minInputValue) || (y > UserInput.maxInputValue || y < UserInput.minInputValue))
+            if (UserInput.ValidateUserInputValue(x, y) == true)
             {
-                Console.WriteLine(UserInput.wrongUserInput);
-            }
-            else
-            {
-                game = new Game(x, y);
-                gameGraphic = new GameGraphic(game);
+                _game = new Game(x, y);
+                _gameGraphic = new GameGraphic(_game);
 
                 while (Console.KeyAvailable == false)
                 {
-                    Console.WriteLine("Live cells: " + gameGraphic.CalculateLiveCellsCurrentGeneration() + "Iteration: " + game.iterationCount);
-                    gameGraphic.DrawGameWindow();
-                    game.GenerateNextGeneration();
-                    Thread.Sleep(1000);
-                    Console.WriteLine();
+                    UpdateGameField();
                 }
             }
         }
         /// <summary>
         /// Creates and displays game with default Height and Width values.
         /// </summary>
-        /// <returns></returns>
-        public void RunRandomGame()
+        private void RunRandomGame()
         {
-            game = new Game();
-            gameGraphic = new GameGraphic(game);
+            _game = new Game();
+            _gameGraphic = new GameGraphic(_game);
+            
             while (Console.KeyAvailable == false)
             {
-                Console.WriteLine("Live cells " + gameGraphic.CalculateLiveCellsCurrentGeneration() + "Iteration: " + game.iterationCount);
-                gameGraphic.DrawGameWindow();
-                game.GenerateNextGeneration();
-                Thread.Sleep(1000);
-                Console.WriteLine();
+                UpdateGameField();
             }
         }
         /// <summary>
@@ -57,8 +45,9 @@
         {
             DataManagement dataManagement = new DataManagement();
 
-            while (gameIsRunning || Console.KeyAvailable == false)
+            while (_gameIsRunning)
             {
+                GameMenu.DisplayApplicationMenu();
                 switch (GameMenu.GetMenuResponse())
                 {
                     case ConsoleKey.P:
@@ -68,19 +57,32 @@
                         RunRandomGame();
                         break;
                     case ConsoleKey.S:
-                        dataManagement.SaveGame(game);
+                        dataManagement.SaveGame(_game);
                         break;
                     case ConsoleKey.L:
                         dataManagement.LoadGame();
                         break;
                     case ConsoleKey.Q:
-                        gameIsRunning = false;
+                        _gameIsRunning = false;
                         GameMenu.DisplayExitMessage();
                         break;
                     default:
                         GameMenu.DisplayExitMessage();
                         break;
                 }
+            }
+        }
+        /// <summary>
+        /// Updates game field.
+        /// </summary>
+        private void UpdateGameField()
+        {
+            while (Console.KeyAvailable == false)
+            { 
+                _gameGraphic.DrawGameWindow();
+                _game.GenerateNextGeneration();
+                Thread.Sleep(1000);
+                Console.WriteLine();
             }
         }
     }

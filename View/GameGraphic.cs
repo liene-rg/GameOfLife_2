@@ -49,7 +49,7 @@
             if(CalculateLiveCellsCurrentGeneration() == 0)
             {
                 Console.Clear();
-                Console.WriteLine("Game ended");
+                Console.WriteLine(GameMenu.gameFinished);
             }
         }
         /// <summary>

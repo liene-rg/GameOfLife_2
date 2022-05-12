@@ -6,14 +6,22 @@ namespace GameOfLife
     public class DataManagement
     {
         private string filePath = "gameOutput.txt";
+        private Game game;
         /// <summary>
         /// Saves the game to a file.
         /// </summary>
         /// <param name="game Instance of a Game class."></param>
         public void SaveGame(Game game)
         {
-            FileStream fileStream = new FileStream(filePath, FileMode.Create);
+            FileStream fileStream;
             BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            fileStream = File.Create(filePath);
             try
             {
                 binaryFormatter.Serialize(fileStream, game);
@@ -23,7 +31,7 @@ namespace GameOfLife
                 Console.WriteLine(GameMenu.failedToSaveMsg + exception.Message);
                 throw;
             }
-
+            Console.WriteLine(GameMenu.gameSaved);
             fileStream.Close();
         }
         /// <summary>
@@ -32,21 +40,23 @@ namespace GameOfLife
         /// <returns>Returns the object previosly saved on the file.</returns>
         public Game LoadGame()
         {
-            Game game = new Game();
-            FileStream fileStream = new FileStream(filePath, FileMode.Open);
-            try
+            game = new Game();
+            FileStream fileStream;
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            if (File.Exists(filePath))
             {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                game = (Game)binaryFormatter.Deserialize(fileStream);
+                try
+                {
+                    fileStream = File.OpenRead(filePath);
+                    game = (Game)binaryFormatter.Deserialize(fileStream);
+                }
+                catch (SerializationException exception)
+                {
+                    Console.WriteLine(GameMenu.failedToLoadMsg + exception.Message);
+                    throw;
+                }
+                fileStream.Close();
             }
-            catch (SerializationException exception)
-            {
-                Console.WriteLine(GameMenu.failedToLoadMsg + exception.Message);
-                throw;
-            }
-
-            fileStream.Close();
-
             return game;
         }
     }

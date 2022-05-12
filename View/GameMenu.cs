@@ -2,7 +2,7 @@
 {
     public class GameMenu
     {
-        public static string newCustomGameOption = "Press 'P' to Play game.";
+        public static string newCustomGameOption = "Press 'P' to Play Custom game.";
         public static string newRandomGameOptions = "Press 'R' to Play Random game.";
         public static string saveGameOption = "Press 'S' to Save game.";
         public static string loadGameOption = "Press 'L' to Load game.";
@@ -11,13 +11,14 @@
         public static string gameTitle = "Game Of Life";
         public static string failedToSaveMsg = "Failed to Save game.";
         public static string failedToLoadMsg = "Failed to Load game.";
+        public static string gameSaved = "Game saved.";
+
         /// <summary>
         /// Get response from user.
         /// </summary>
         /// <returns>Returns menu input from user.</returns>
         public static ConsoleKey GetMenuResponse()
         {
-            DisplayApplicationMenu();
             return Console.ReadKey(true).Key;    
         }
         /// <summary>

@@ -2,10 +2,10 @@
 {
     public static class UserInput
     {
-        public static int validUserInput;
-        public static string wrongUserInput = "Wrong input, enter different value.";
-        public static int minInputValue = 5;
-        public static int maxInputValue = 40;
+        private static int _validUserInput;
+        private static string wrongUserInput = "Wrong input, enter different value.";
+        private static int _minInputValue = 5;
+        private static int _maxInputValue = 40;
         /// <summary>
         /// Gets the value of either Height or Width from the user.
         /// </summary>
@@ -14,14 +14,22 @@
         public static int GetUserInput(string promptMessage)
         {
             Console.WriteLine(promptMessage);
-            while (!Int32.TryParse(Console.ReadLine(), out validUserInput))
+            while (!Int32.TryParse(Console.ReadLine(), out _validUserInput))
             {
                 Console.WriteLine(wrongUserInput);
                 Console.ReadLine();
-            }
-
-            return validUserInput;
+            }    
+            return _validUserInput;
         }      
 
+        public static bool ValidateUserInputValue(int x, int y )
+        {
+            if ((x > _maxInputValue || x < _minInputValue) || (y > _maxInputValue || y < _minInputValue))
+            {
+                return false;
+            }
+            
+           else return true;
+        }
     }
 }
