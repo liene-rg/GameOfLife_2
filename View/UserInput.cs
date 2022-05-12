@@ -3,7 +3,7 @@
     public static class UserInput
     {
         private static int _validUserInput;
-        private static string wrongUserInput = "Wrong input, enter different value.";
+        private static string _wrongUserInput = "Wrong input, enter different value.";
         private static int _minInputValue = 5;
         private static int _maxInputValue = 40;
         /// <summary>
@@ -16,7 +16,7 @@
             Console.WriteLine(promptMessage);
             while (!Int32.TryParse(Console.ReadLine(), out _validUserInput))
             {
-                Console.WriteLine(wrongUserInput);
+                Console.WriteLine(_wrongUserInput);
                 Console.ReadLine();
             }    
             return _validUserInput;

@@ -5,8 +5,8 @@ namespace GameOfLife
 {
     public class DataManagement
     {
-        private string filePath = "gameOutput.txt";
-        private Game game;
+        private string _filePath = "gameOutput.txt";
+        private Game _game;
         /// <summary>
         /// Saves the game to a file.
         /// </summary>
@@ -16,12 +16,12 @@ namespace GameOfLife
             FileStream fileStream;
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-            if (File.Exists(filePath))
+            if (File.Exists(_filePath))
             {
-                File.Delete(filePath);
+                File.Delete(_filePath);
             }
 
-            fileStream = File.Create(filePath);
+            fileStream = File.Create(_filePath);
             try
             {
                 binaryFormatter.Serialize(fileStream, game);
@@ -40,15 +40,15 @@ namespace GameOfLife
         /// <returns>Returns the object previosly saved on the file.</returns>
         public Game LoadGame()
         {
-            game = new Game();
+            _game = new Game();
             FileStream fileStream;
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            if (File.Exists(filePath))
+            if (File.Exists(_filePath))
             {
                 try
                 {
-                    fileStream = File.OpenRead(filePath);
-                    game = (Game)binaryFormatter.Deserialize(fileStream);
+                    fileStream = File.OpenRead(_filePath);
+                    _game = (Game)binaryFormatter.Deserialize(fileStream);
                 }
                 catch (SerializationException exception)
                 {
@@ -57,7 +57,7 @@ namespace GameOfLife
                 }
                 fileStream.Close();
             }
-            return game;
+            return _game;
         }
     }
 }
