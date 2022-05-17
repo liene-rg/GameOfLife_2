@@ -21,7 +21,7 @@
 
                 while (Console.KeyAvailable == false)
                 {
-                    UpdateGameField();
+                    UpdateGameField(_game, _gameGraphic);
                 }
             }
         }
@@ -35,7 +35,7 @@
             
             while (Console.KeyAvailable == false)
             {
-                UpdateGameField();
+                UpdateGameField(_game, _gameGraphic);
             }
         }
         /// <summary>
@@ -49,11 +49,9 @@
 
             while (Console.KeyAvailable == false)
             {
-                _savedGraphic.DrawGameWindow();
-                _savedGame.GenerateNextGeneration();
-                Thread.Sleep(1000);
-                Console.WriteLine();
+                UpdateGameField(_savedGame, _savedGraphic);
             }
+
         }
         /// <summary>
         /// Displays the menu and runs the application.
@@ -93,12 +91,12 @@
         /// <summary>
         /// Updates game field.
         /// </summary>
-        private void UpdateGameField()
+        private void UpdateGameField(Game game, GameGraphic gameGraphic)
         {
             while (Console.KeyAvailable == false)
             { 
-                _gameGraphic.DrawGameWindow();
-                _game.GenerateNextGeneration();
+                gameGraphic.DrawGameWindow();
+                game.GenerateNextGeneration();
                 Thread.Sleep(1000);
                 Console.WriteLine();
             }
