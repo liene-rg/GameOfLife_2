@@ -39,6 +39,23 @@
             }
         }
         /// <summary>
+        /// Runs and displays previosly saved game.
+        /// </summary>
+        /// <param name="dataManagement object"></param>
+        private void RunSavedGame(DataManagement dataManagement)
+        {
+            Game _savedGame = dataManagement.LoadGame();
+            GameGraphic _savedGraphic= new GameGraphic(_savedGame);
+
+            while (Console.KeyAvailable == false)
+            {
+                _savedGraphic.DrawGameWindow();
+                _savedGame.GenerateNextGeneration();
+                Thread.Sleep(1000);
+                Console.WriteLine();
+            }
+        }
+        /// <summary>
         /// Displays the menu and runs the application.
         /// </summary>
         public void RunApplication()
@@ -61,6 +78,7 @@
                         break;
                     case ConsoleKey.L:
                         dataManagement.LoadGame();
+                        RunSavedGame(dataManagement);
                         break;
                     case ConsoleKey.Q:
                         _gameIsRunning = false;
