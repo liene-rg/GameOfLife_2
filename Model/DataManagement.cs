@@ -7,6 +7,7 @@ namespace GameOfLife
     {
         private string _filePath = "gameOutput.txt";
         private Game _game;
+
         /// <summary>
         /// Saves the game to a file.
         /// </summary>
@@ -22,6 +23,7 @@ namespace GameOfLife
             }
 
             fileStream = File.Create(_filePath);
+
             try
             {
                 binaryFormatter.Serialize(fileStream, game);
@@ -31,9 +33,11 @@ namespace GameOfLife
                 Console.WriteLine(GameMenu.failedToSaveMsg + exception.Message);
                 throw;
             }
+
             Console.WriteLine(GameMenu.gameSaved);
             fileStream.Close();
         }
+
         /// <summary>
         /// Retrieves the game information and loads the game from a file.
         /// </summary>
@@ -43,6 +47,7 @@ namespace GameOfLife
             _game = new Game();
             FileStream fileStream;
             BinaryFormatter binaryFormatter = new BinaryFormatter();
+
             if (File.Exists(_filePath))
             {
                 try
@@ -55,8 +60,10 @@ namespace GameOfLife
                     Console.WriteLine(GameMenu.failedToLoadMsg + exception.Message);
                     throw;
                 }
+
                 fileStream.Close();
             }
+
             return _game;
         }
     }

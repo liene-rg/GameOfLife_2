@@ -21,6 +21,7 @@
         {
             return Console.ReadKey(true).Key;    
         }
+
         /// <summary>
         /// Displays the menu on console.
         /// </summary>
@@ -33,6 +34,7 @@
             Console.WriteLine(loadGameOption);
             Console.WriteLine(quitGameOption);
         }
+
         /// <summary>
         /// Displays the exit message after user has exited the game.
         /// </summary>

@@ -16,8 +16,8 @@
         /// </summary>
         public Game()
         {
-            Height = 16;
-            Width = 16;
+            Height = GameParameters.rows;
+            Width = GameParameters.columns;
             currentGeneration = new int[Height, Width];
 
             InitializeBoard();
@@ -26,39 +26,34 @@
         /// <summary>
         /// Constructor with parameters from user.
         /// </summary>
-        /// <param name="x Number of rows (height)."></param> 
-        /// <param name="y  Number of columns (width)."></param>
-        public Game(int x, int y)
+        /// <param name="row Number of rows (height)."></param> 
+        /// <param name="column  Number of columns (width)."></param>
+        public Game(int row, int column)
         {
-            this.Height = x;
-            this.Width = y;
+            this.Height = row;
+            this.Width = column;
 
             currentGeneration = new int[Height, Width];
-
             InitializeBoard();
         }
+
         /// <summary>
         /// Initiate current and next generation boards.
         /// </summary>
         private void InitializeBoard()
         {
-            //Loop over cells using range to set live/ dead cells.
-
             var range = new Random();
-
-            for (int i = 0; i < Height; i++)
+            for (int row = 0; row < Height; row++)
             {
-                for (int j = 0; j < Width; j++)
+                for (int column = 0; column < Width; column++)
                 {
-                    // Create a random board.
-
                     if (range.Next(1, 101) < 70)
                     {
-                        currentGeneration[i, j] = 0;
+                        currentGeneration[row, column] = 0;
                     }
                     else
                     {
-                        currentGeneration[i, j] = 1;
+                        currentGeneration[row, column] = 1;
                     }
                 }
             }
@@ -92,22 +87,22 @@
         public void GenerateNextGeneration()
         {
             int[,] nextGeneration = new int[Height, Width];
-            for (int x = 0; x < this.Height; x++)
+            for (int row = 0; row < this.Height; row++)
             {
-                for (int y = 0; y < this.Width; y++)
+                for (int column = 0; column < this.Width; column++)
                 {
-                    int liveNeighbours = CalcLiveNeighbours(x, y);
+                    int liveNeighbours = CalcLiveNeighbours(row, column);
 
                     switch (liveNeighbours)
                     {
                         case 3:
-                            nextGeneration[x, y] = 1;
+                            nextGeneration[row, column] = 1;
                             break;
                         case 2:
-                            nextGeneration[x, y] = currentGeneration[x, y];
+                            nextGeneration[row, column] = currentGeneration[row, column];
                             break;
                         default:
-                            nextGeneration[x, y] = 0;
+                            nextGeneration[row, column] = 0;
                             break;
                     }
                 }

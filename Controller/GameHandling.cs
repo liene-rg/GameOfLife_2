@@ -11,12 +11,12 @@
         /// </summary>
         private void RunCustomGame()
         {
-            int x = UserInput.GetUserInput("Enter the Heigth");
-            int y = UserInput.GetUserInput("Enter the Width");
+            int row = UserInput.GetUserInput("Enter the Heigth");
+            int column = UserInput.GetUserInput("Enter the Width");
 
-            if (UserInput.ValidateUserInputValue(x, y) == true)
+            if (UserInput.ValidateUserInputValue(row, column) == true)
             {
-                _game = new Game(x, y);
+                _game = new Game(row, column);
                 _gameGraphic = new GameGraphic(_game);
 
                 while (Console.KeyAvailable == false)
@@ -25,6 +25,7 @@
                 }
             }
         }
+
         /// <summary>
         /// Creates and displays game with default Height and Width values.
         /// </summary>
@@ -32,12 +33,13 @@
         {
             _game = new Game();
             _gameGraphic = new GameGraphic(_game);
-            
+
             while (Console.KeyAvailable == false)
             {
                 UpdateGameField(_game, _gameGraphic);
             }
         }
+
         /// <summary>
         /// Runs and displays previosly saved game.
         /// </summary>
@@ -45,14 +47,14 @@
         private void RunSavedGame(DataManagement dataManagement)
         {
             Game _savedGame = dataManagement.LoadGame();
-            GameGraphic _savedGraphic= new GameGraphic(_savedGame);
+            GameGraphic _savedGraphic = new GameGraphic(_savedGame);
 
             while (Console.KeyAvailable == false)
             {
                 UpdateGameField(_savedGame, _savedGraphic);
             }
-
         }
+
         /// <summary>
         /// Displays the menu and runs the application.
         /// </summary>
@@ -88,15 +90,16 @@
                 }
             }
         }
-       /// <summary>
-       /// Updates and displays the game.
-       /// </summary>
-       /// <param name="game Instance of Game class."></param>
-       /// <param name="gameGraphic Instance of GameGraphic class."></param>
+
+        /// <summary>
+        /// Updates and displays the game.
+        /// </summary>
+        /// <param name="game Instance of Game class."></param>
+        /// <param name="gameGraphic Instance of GameGraphic class."></param>
         private void UpdateGameField(Game game, GameGraphic gameGraphic)
         {
             while (Console.KeyAvailable == false)
-            { 
+            {
                 gameGraphic.DrawGameWindow();
                 game.GenerateNextGeneration();
                 Thread.Sleep(1000);

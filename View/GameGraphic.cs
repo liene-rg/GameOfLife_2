@@ -18,11 +18,11 @@
         /// </summary>
         public void DrawBoard()
         {
-            for (int i = 0; i < gameOfLife.Height; i++)
+            for (int row = 0; row < gameOfLife.Height; row++)
             {
-                for (int j = 0; j < gameOfLife.Width; j++)
+                for (int column = 0; column < gameOfLife.Width; column++)
                 {
-                    if (gameOfLife.currentGeneration[i, j] == 1)
+                    if (gameOfLife.currentGeneration[row, column] == 1)
                     {
                         Console.Write("*");
                     }
@@ -31,9 +31,11 @@
                         Console.Write(" ");
                     }
                 }
+
                 Console.WriteLine();
             }
         }
+
         /// <summary>
         /// Displays the game and game information.
         /// </summary>
@@ -43,7 +45,6 @@
             GameMenu.DisplayApplicationMenu();
             Console.WriteLine();
             Console.WriteLine("Live cells: " + CalculateLiveCellsCurrentGeneration() + " Iteration: " + gameOfLife.iterationCount);
-            
             DrawBoard();
 
             if(CalculateLiveCellsCurrentGeneration() == 0)
@@ -52,6 +53,7 @@
                 Console.WriteLine(GameMenu.gameFinished);
             }
         }
+
         /// <summary>
         /// Calculates number of live cells in current generation.
         /// </summary>
@@ -59,11 +61,11 @@
         public int CalculateLiveCellsCurrentGeneration()
         {
             int liveCells = 0;
-            for (int i = 0; i < gameOfLife.Height; i++)
+            for (int row = 0; row < gameOfLife.Height; row++)
             {
-                for (int j = 0; j < gameOfLife.Width; j++)
+                for (int column = 0; column < gameOfLife.Width; column++)
                 {
-                    liveCells += gameOfLife.currentGeneration[i, j];
+                    liveCells += gameOfLife.currentGeneration[row, column];
                 }
             }
 
