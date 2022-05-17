@@ -88,9 +88,11 @@
                 }
             }
         }
-        /// <summary>
-        /// Updates game field.
-        /// </summary>
+       /// <summary>
+       /// Updates and displays the game.
+       /// </summary>
+       /// <param name="game Instance of Game class."></param>
+       /// <param name="gameGraphic Instance of GameGraphic class."></param>
         private void UpdateGameField(Game game, GameGraphic gameGraphic)
         {
             while (Console.KeyAvailable == false)
