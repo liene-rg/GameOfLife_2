@@ -2,9 +2,9 @@
 {
     public static class GameParameters
     {
-        public const int rows = 16;
-        public const int columns = 16;
-        public const int minInputValue = 5;
-        public const int maxInputValue = 40;
+        public const int DefaultNumOfRows = 16;
+        public const int DefaultNumOfColumns = 16;
+        public const int MinInputValue = 5;
+        public const int MaxInputValue = 40;
     }
 }

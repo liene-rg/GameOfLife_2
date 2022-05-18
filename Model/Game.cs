@@ -16,8 +16,8 @@
         /// </summary>
         public Game()
         {
-            Height = GameParameters.rows;
-            Width = GameParameters.columns;
+            Height = GameParameters.DefaultNumOfRows;
+            Width = GameParameters.DefaultNumOfColumns;
             currentGeneration = new int[Height, Width];
 
             InitializeBoard();

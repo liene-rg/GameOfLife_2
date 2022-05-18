@@ -6,7 +6,7 @@
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="gameObject Game object that will be made."></param> 
+        /// <param name="gameObject">Game object that will be made.</param> 
         public GameGraphic(Game gameObject)
         {
             gameOfLife = gameObject;
@@ -42,7 +42,7 @@
         public void DrawGameWindow()
         {
             Console.Clear();
-            GameMenu.DisplayApplicationMenu();
+            GameMenu.DisplayGameMenu();
             Console.WriteLine();
             Console.WriteLine("Live cells: " + CalculateLiveCellsCurrentGeneration() + " Iteration: " + gameOfLife.iterationCount);
             DrawBoard();

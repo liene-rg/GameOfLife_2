@@ -4,7 +4,7 @@
     {
         private static int _validUserInput;
         private static string _wrongUserInput = "Wrong input, enter different value.";
-        
+
         /// <summary>
         /// Gets the value of either Height or Width from the user.
         /// </summary>
@@ -17,7 +17,7 @@
             {
                 Console.WriteLine(_wrongUserInput);
                 Console.ReadLine();
-            }    
+            }
 
             return _validUserInput;
         }
@@ -25,18 +25,18 @@
         /// <summary>
         /// Validates if user has entered the values within the required range.
         /// </summary>
-        /// <param name="row ">Integer value of user input.</param>
+        /// <param name="row">Integer value of user input.</param>
         /// <param name="column">Integer value of user input.</param>
         /// <returns>Returns true if values are within range, false otherwise.</returns>
-        public static bool ValidateUserInputValue(int row, int column )
+        public static bool ValidateUserInputValue(int row, int column)
         {
-            if ((row > GameParameters.minInputValue || row < GameParameters.minInputValue) || 
-                (column > GameParameters.maxInputValue || column < GameParameters.maxInputValue))
+            if ((row >= GameParameters.MinInputValue && row <= GameParameters.MaxInputValue) && 
+                (column >= GameParameters.MinInputValue && column <= GameParameters.MaxInputValue))
             {
-                return false;
+                return true;
             }
             
-           else return true;
+           return false;
         }
     }
 }

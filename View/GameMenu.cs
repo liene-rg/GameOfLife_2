@@ -27,9 +27,20 @@
         /// </summary>
         public static void DisplayApplicationMenu()
         {
+            Console.Clear();
             Console.Title = gameTitle;
             Console.WriteLine(newCustomGameOption);
             Console.WriteLine(newRandomGameOptions);
+            Console.WriteLine(quitGameOption);
+        }
+
+        /// <summary>
+        /// Displays the menu while game is running on console.
+        /// </summary>
+        public static void DisplayGameMenu()
+        {
+            Console.Clear();
+            Console.Title = gameTitle;
             Console.WriteLine(saveGameOption);
             Console.WriteLine(loadGameOption);
             Console.WriteLine(quitGameOption);

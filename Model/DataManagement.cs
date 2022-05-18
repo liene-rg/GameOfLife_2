@@ -11,7 +11,7 @@ namespace GameOfLife
         /// <summary>
         /// Saves the game to a file.
         /// </summary>
-        /// <param name="game Instance of a Game class."></param>
+        /// <param name="game">Instance of a Game class.</param>
         public void SaveGame(Game game)
         {
             FileStream fileStream;
@@ -44,7 +44,6 @@ namespace GameOfLife
         /// <returns>Returns the object previosly saved on the file.</returns>
         public Game LoadGame()
         {
-            _game = new Game();
             FileStream fileStream;
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
